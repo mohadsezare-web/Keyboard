@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DKeyboard</title>
+    <link rel="stylesheet" href="stayle.css">
+    <link rel="stylesheet" href="css/fontello.css">
+</head>
+<body>
+    <div class="me">
+        <h1 >Mohadese zare
+            <ul>
+                <li><span class="icon-instagram-1"></span>Mohaddeseh.dev</li>
+                <li><span class="icon-linkedin"></span>Mohadsezare_web</li>
+                <li><span class="icon-github-circled"></span>Mohadsezare_web</li>
+            </ul>
+        </h1>
+    </div>
+    <div class="keyboard-container">
+        <input type="text" id="text-input" placeholder="Type your text...">
+        <div class="keyboard">
+            <div class="row">
+                <button class="key">`</button>
+                <button class="key">1</button>
+                <button class="key">2</button>
+                <button class="key">3</button>
+                <button class="key">4</button>
+                <button class="key">5</button>
+                <button class="key">6</button>
+                <button class="key">7</button>
+                <button class="key">8</button>
+                <button class="key">9</button>
+                <button class="key">0</button>
+                <button class="key">-</button>
+                <button class="key">=</button>
+            </div>
+            <div class="row">
+                <button class="key">Q</button>
+                <button class="key">W</button>
+                <button class="key">E</button>
+                <button class="key">R</button>
+                <button class="key">T</button>
+                <button class="key">Y</button>
+                <button class="key">U</button>
+                <button class="key">I</button>
+                <button class="key">O</button>
+                <button class="key">P</button>
+                <button class="key">[</button>
+                <button class="key">]</button>
+            </div>
+            <div class="row">
+                <button class="key">A</button>
+                <button class="key">S</button>
+                <button class="key">D</button>
+                <button class="key">F</button>
+                <button class="key">G</button>
+                <button class="key">H</button>
+                <button class="key">J</button>
+                <button class="key">K</button>
+                <button class="key">L</button>
+                <button class="key">;</button>
+                <button class="key">'</button>
+            </div>
+            <div class="row">
+                <button class="key">Z</button>
+                <button class="key">X</button>
+                <button class="key">C</button>
+                <button class="key">V</button>
+                <button class="key">B</button>
+                <button class="key">N</button>
+                <button class="key">M</button>
+                <button class="key">,</button>
+                <button class="key">.</button>
+                <button class="key">/</button>
+            </div>
+            <div class="row">
+                <button class="key special shift">Shift</button>
+                <button class="key special">@</button>
+                <button class="key space">—</button>
+                <button class="key backspace">×</button>
+                <button class="key enter">Enter</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    const keys = document.querySelectorAll('.key')
+    const textinput = document.getElementById('text-input')
+    let isShiftActive = false
+
+    keys.forEach((key) =>{
+        key.addEventListener('click' , () =>{
+            let keytext = key.textContent
+
+            if(key.classList.contains('backspace')){
+                textinput.value = textinput.value.slice(0 , -1)
+            }else if(key.classList.contains('space')){
+                textinput.value += " "
+            }else if(key.classList.contains('enter')){
+                textinput.value += "\n"
+            }else if(key.classList.contains('shift')){
+                isShiftActive = !isShiftActive
+                keys.forEach((k) =>{
+                    if(!k.classList.contains('special')){
+                        k.textContent = isShiftActive ? k.textContent.toUpperCase() : k.textContent.toLocaleLowerCase()
+                    }
+                })
+            }else{
+                textinput.value += isShiftActive ? keytext.toUpperCase() : keytext.toLocaleLowerCase()
+            }
+        })
+    })
+
+    document.addEventListener('keydown', (event)=>{
+        let key = event.key
+        if(key === 'backspace'){
+            textinput.value = textinput.value.slice(0 , -1)
+        }else if(key === ' '){
+            textinput.value += ' '
+        }else if(key === 'enter'){
+            textinput.value += "\n"
+        }else if(key.length === 1){
+            textinput.value += key
+        }
+    })
+</script>
+</html>
